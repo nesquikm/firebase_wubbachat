@@ -10,7 +10,7 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
     structuredData: true,
   });
 
-  const { id, topic, messageBody, fromId, fromNickname, fromColor } = data;
+  const {id, topic, messageBody, fromId, fromNickname, fromColor} = data;
 
   const expTopic = /([0-9a-zA-Z-]+)_(.*)/;
   const match = topic.match(expTopic);
@@ -33,16 +33,16 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
   };
 
   admin
-    .messaging()
-    .send(payload)
-    .then((response) => {
+      .messaging()
+      .send(payload)
+      .then((response) => {
       // Response is a message ID string.
-      console.log("Successfully sent message:", response);
-      return { success: true };
-    })
-    .catch((error) => {
-      return { error: error.code };
-    });
+        console.log("Successfully sent message:", response);
+        return {success: true};
+      })
+      .catch((error) => {
+        return {error: error.code};
+      });
 
   return {
     altered: `Response for ${data.text}`,
