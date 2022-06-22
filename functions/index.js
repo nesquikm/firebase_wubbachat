@@ -28,7 +28,8 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
       fromId,
       fromNickname,
       fromColor,
-      messageBody: messageBody,
+      messageBody,
+      topic,
     },
   };
 
