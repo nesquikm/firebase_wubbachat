@@ -31,6 +31,18 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
       messageBody,
       topic,
     },
+    apns: {
+      payload: {
+        aps: {
+          contentAvailable: true,
+        },
+      },
+      headers: {
+        "apns-push-type": "alert",
+        "apns-priority": "5",
+        "apns-topic": "app.web.flutter.wubbachat.flutter-wubbachat",
+      },
+    },
   };
 
   admin
@@ -38,14 +50,15 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
       .send(payload)
       .then((response) => {
       // Response is a message ID string.
-        console.log("Successfully sent message:", response);
+        console.log("Successfully sent message");
         return {success: true};
       })
       .catch((error) => {
+        console.log("Failed to sent message " + error);
         return {error: error.code};
       });
 
   return {
-    altered: `Response for ${data.text}`,
+    response: "Ok",
   };
 });
