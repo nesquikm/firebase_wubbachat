@@ -39,7 +39,7 @@ exports.sendMessageToTopic = functions.https.onCall((data, context) => {
       },
       headers: {
         "apns-push-type": "alert",
-        "apns-priority": "5",
+        "apns-priority": "10",
         "apns-topic": "app.web.flutter.wubbachat.flutter-wubbachat",
       },
     },
